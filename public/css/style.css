@@ -1,6 +1,14 @@
 /* body */
 body {
     font-family: "Plus Jakarta Sans", sans-serif !important;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+/* container */
+.container {
+    flex : 1;
 }
 
 /* Navbar */
@@ -59,16 +67,51 @@ body {
     margin-bottom: 2rem;
 }
 
-.card-image-top {
+.card-img-top {
     border-radius: 1rem !important;
     width: 100% !important;
     object-fit: cover !important;
+    overflow: hidden !important;
+    /* display: block !important; */
 }
 
 .card-body {
     padding: 0 !important;
 }
 
-/* .card-text p {
-    font-weight: ;
-} */
+.card-text p {
+    font-weight: 400 !important;
+}
+
+/* Anchor tag listing link */
+.listing-link {
+    text-decoration: none;
+}
+
+/* card effect overlay*/
+.card-img-overlay {
+    opacity: 0;
+}
+
+.card-img-overlay:hover {
+    opacity: 0.2;
+    background-color: white;
+}
+
+.add-btn {
+    background-color: #fe424d !important;
+    border: none !important
+}
+
+/* show page */
+.show-img {
+    height: 30vh;
+}
+
+.btns {
+    display: flex;
+}
+
+.show-card {
+    padding: 0;
+}
