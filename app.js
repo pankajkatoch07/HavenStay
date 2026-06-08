@@ -6,7 +6,6 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 
-
 const listings = require("./routes/listing.js");
 const reviews = require("./routes/review.js");
 
