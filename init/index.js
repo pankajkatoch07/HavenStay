@@ -10,6 +10,7 @@ main().then(()=>{console.log("Connected to Database")}).catch(err => console.log
 
 const initDB = async () => {
     await Listing.deleteMany({});
+    initData.data = initData.data.map((obj) => ({...obj, owner: '6a32daffe3ef1d278db782e8'}));
     await Listing.insertMany(initData.data);
     console.log("data was initialized");
 };
