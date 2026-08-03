@@ -1,3 +1,8 @@
+//to read env file 
+if(process.env.NODE_ENV != "production"){
+ require('dotenv').config()
+}
+
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
@@ -10,6 +15,7 @@ const flash = require("@stz184/connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("./models/user.js");
+const ExpressError = require("./utils/ExpressError.js");
 
 //routers
 const listings = require("./routes/listing.js");
