@@ -46,6 +46,20 @@
         <div class="invalid-feedback">Please enter a valid location</div>
         </div>
 
+        <div class="mb-3">
+        <label for="category" class="form-label">Category</label>
+        <select name="listing[category]" id="category" class="form-select" required>
+            <option value="trending" <%= listing.category === 'trending' ? 'selected' : '' %>>Trending</option>
+            <option value="rooms" <%= listing.category === 'rooms' ? 'selected' : '' %>>Rooms</option>
+            <option value="iconic-cities" <%= listing.category === 'iconic-cities' ? 'selected' : '' %>>Iconic Cities</option>
+            <option value="mountains" <%= listing.category === 'mountains' ? 'selected' : '' %>>Mountains</option>
+            <option value="beaches" <%= listing.category === 'beaches' ? 'selected' : '' %>>Beaches</option>
+            <option value="villa" <%= listing.category === 'villa' ? 'selected' : '' %>>Villa</option>
+            <option value="camping" <%= listing.category === 'camping' ? 'selected' : '' %>>Camping</option>
+            <option value="boats" <%= listing.category === 'boats' ? 'selected' : '' %>>Boats</option>
+        </select>
+        </div>
+
         <button class="btn btn-dark add-btn mb-3 mt-3">Edit</button>
     </form>
     </div>

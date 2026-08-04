@@ -13,7 +13,51 @@ body {
 
 /* Navbar */
 .navbar {
-    height: 5rem;
+    min-height: 5rem;
+    padding: 0.75rem 1rem;
+}
+
+.navbar-toggler {
+    border: none;
+    padding: 0.25rem 0.5rem;
+}
+
+.navbar-collapse {
+    width: 100%;
+}
+
+.navbar-nav .nav-link {
+    padding: 0.5rem 1rem;
+}
+
+@media (max-width: 767.98px) {
+    .navbar {
+        min-height: auto;
+    }
+
+    .navbar-collapse {
+        margin-top: 0.75rem;
+        background: #ffffff;
+        border-top: 1px solid #e5e5e5;
+        border-radius: 0.5rem;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        padding: 0.25rem 0;
+    }
+
+    .navbar-nav,
+    .navbar-nav.ms-auto {
+        width: 100%;
+        margin-left: 0 !important;
+    }
+
+    .navbar-nav .nav-link {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .navbar-nav .nav-link:last-child {
+        border-bottom: none;
+    }
 }
 
 .fa-earth-americas {

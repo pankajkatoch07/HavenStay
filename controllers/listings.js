@@ -1,5 +1,6 @@
 const Listing = require("../models/listing");
 const { cloudinary } = require("../cloudConfig");
+const { CATEGORY_OPTIONS, normalizeCategory, getCategoryLabel } = require("../utils/categories");
 
 const getCloudinaryPreviewUrl = (listing) => {
     if (!listing?.image?.filename) return listing?.image?.url;
@@ -12,8 +13,10 @@ const getCloudinaryPreviewUrl = (listing) => {
 
 // index route
 module.exports.index = async (req ,res) => {
-    const alllistings = await Listing.find();
-    res.render("listings/index.ejs", { alllistings })
+    const selectedCategory = req.query.category ? normalizeCategory(req.query.category) : "trending";
+    const filter = { category: selectedCategory };
+    const alllistings = await Listing.find(filter);
+    res.render("listings/index.ejs", { alllistings, categories: CATEGORY_OPTIONS, selectedCategory, getCategoryLabel })
 }
 
 //New Route
@@ -38,6 +41,7 @@ module.exports.createListing = async (req, res, next) => {
     let filename = req.file.filename;
     const newListing = new Listing(req.body.listing);
     newListing.owner = req.user._id;
+    newListing.category = normalizeCategory(req.body.listing.category);
     newListing.image = {url , filename};
     await newListing.save();
     req.flash("success" , "New Listing Created!");
@@ -60,8 +64,12 @@ module.exports.renderEditForm = async (req, res, next) => {
 // Update Route
 module.exports.updateListing = async (req, res, next) => {
     let { id } = req.params;
-    let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
-    if(typeof req.file !== undefined) {
+    const listingData = {
+        ...req.body.listing,
+        category: normalizeCategory(req.body.listing.category)
+    };
+    let listing = await Listing.findByIdAndUpdate(id, listingData);
+    if(req.file) {
     let url = req.file.path;
     let filename = req.file.filename;
 

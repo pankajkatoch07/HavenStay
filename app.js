@@ -3,6 +3,7 @@ if(process.env.NODE_ENV != "production"){
  require('dotenv').config()
 }
 
+//important modules
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
@@ -28,6 +29,7 @@ async function main() {
 
 main().then(() => { console.log("Connected to Database") }).catch(err => console.log(err));
 
+// built-in middlewares
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.json()); //parses data from like postman or hopscotch
@@ -48,9 +50,9 @@ const sessionOptions = {
 }
 
 // root page
-app.get("/", (req, res) => {
-    res.send("Welcome to the home page");
-});
+// app.get("/", (req, res) => {
+//     res.send("Welcome to the home page");
+// });
 
 app.use(session(sessionOptions));
 app.use(flash());

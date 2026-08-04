@@ -1,9 +1,45 @@
 <% layout("/layouts/boilerplate") %>
     <body>
-        <h3 class="heading-one">All Listings</h3>
+        <!-- <h3 class="heading-one">All Listings</h3> -->
         <!-- <form action="/listings/new" method="GET">
         <button>Create New Listing</button>
     </form> -->
+    <style>
+        #filters {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .filter {
+            text-align: center;
+            margin-top: 1rem;
+            opacity: 0.8;
+            min-width: 6rem;
+        }
+
+        .filter:hover {
+            opacity: 1;
+            cursor: pointer;
+        }
+
+        .filter.active {
+            opacity: 1;
+            color: #ff5a5f;
+            font-weight: 700;
+        }
+    </style>
+    <div id="filters">
+        <% categories.forEach((category) => { %>
+            <a href="/listings<%= category.value === 'trending' ? '' : '?category=' + category.value %>" class="text-decoration-none text-dark">
+                <div class="filter <%= selectedCategory === category.value ? 'active' : '' %>">
+                    <div><i class="fa-solid <%= category.icon %>"></i></div>
+                    <p><%= category.label %></p>
+                </div>
+            </a>
+        <% }) %>
+    </div>
     <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1">
     <% for(let listing of alllistings) { %>
         <a href="/listings/<%= listing._id %>" class="listing-link">
