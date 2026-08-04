@@ -1,4 +1,14 @@
 const Listing = require("../models/listing");
+const { cloudinary } = require("../cloudConfig");
+
+const getCloudinaryPreviewUrl = (listing) => {
+    if (!listing?.image?.filename) return listing?.image?.url;
+
+    return cloudinary.url(listing.image.filename, {
+        secure: true,
+        transformation: [{ width: 250, height: 300, crop: "fill" }],
+    });
+};
 
 // index route
 module.exports.index = async (req ,res) => {
@@ -42,7 +52,9 @@ module.exports.renderEditForm = async (req, res, next) => {
         req.flash("error" , "Listing does not exist");
         return res.redirect("/listings")
     }
-    res.render("listings/edit.ejs", { listing });
+
+    const previewImageUrl = getCloudinaryPreviewUrl(listing);
+    res.render("listings/edit.ejs", { listing, previewImageUrl });
 }
 
 // Update Route
